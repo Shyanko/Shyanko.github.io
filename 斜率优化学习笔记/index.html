@@ -1,0 +1,202 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>斜率优化学习笔记 | Not A Blog</title><meta name="author" content="Shyanko"><meta name="copyright" content="Shyanko"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="一个方程： \[f_i &#x3D; \min_{j&#x3D;1}^{i-1}{\{f_j+w_j*l_i\}}\] 附加条件：\(w_j\) 单调递减，\(l_i\) 单调递增。 考虑固定 \(j\)，写出 \(f_i\) 随 \(i\) 的关系，观察到如果令 \(k&#x3D;w_j,b&#x3D;f_j\) ，则 \(f_i\) 与 \(l_i\) 成一次函数关系，并且随 \(j\) 的增加，这些直线的斜率单调递减。在">
+<meta property="og:type" content="article">
+<meta property="og:title" content="斜率优化学习笔记">
+<meta property="og:url" content="http://shyanko.github.io/blog/%E6%96%9C%E7%8E%87%E4%BC%98%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+<meta property="og:site_name" content="Not A Blog">
+<meta property="og:description" content="一个方程： \[f_i &#x3D; \min_{j&#x3D;1}^{i-1}{\{f_j+w_j*l_i\}}\] 附加条件：\(w_j\) 单调递减，\(l_i\) 单调递增。 考虑固定 \(j\)，写出 \(f_i\) 随 \(i\) 的关系，观察到如果令 \(k&#x3D;w_j,b&#x3D;f_j\) ，则 \(f_i\) 与 \(l_i\) 成一次函数关系，并且随 \(j\) 的增加，这些直线的斜率单调递减。在">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
+<meta property="article:published_time" content="2021-10-19T10:24:00.000Z">
+<meta property="article:modified_time" content="2024-07-11T09:30:26.659Z">
+<meta property="article:author" content="Shyanko">
+<meta property="article:tag" content="算法竞赛">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><link rel="shortcut icon" href="/blog/img/favicon.png"><link rel="canonical" href="http://shyanko.github.io/blog/%E6%96%9C%E7%8E%87%E4%BC%98%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/blog/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/blog/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '斜率优化学习笔记',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2024-07-11 17:30:26'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/blog/archives/"><div class="headline">文章</div><div class="length-num">8</div></a><a href="/blog/tags/"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/blog/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/blog/" title="Not A Blog"><span class="site-name">Not A Blog</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout hide-aside" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">斜率优化学习笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-10-19T10:24:00.000Z" title="发表于 2021-10-19 18:24:00">2021-10-19</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-07-11T09:30:26.659Z" title="更新于 2024-07-11 17:30:26">2024-07-11</time></span></div><div class="meta-secondline"></div></div></div><article class="post-content" id="article-container"><p>一个方程：</p>
+<p><span class="math display">\[f_i =
+\min_{j=1}^{i-1}{\{f_j+w_j*l_i\}}\]</span></p>
+<p>附加条件：<span class="math inline">\(w_j\)</span> 单调递减，<span
+class="math inline">\(l_i\)</span> 单调递增。</p>
+<p>考虑固定 <span class="math inline">\(j\)</span>，写出 <span
+class="math inline">\(f_i\)</span> 随 <span
+class="math inline">\(i\)</span> 的关系，观察到如果令 <span
+class="math inline">\(k=w_j,b=f_j\)</span> ，则 <span
+class="math inline">\(f_i\)</span> 与 <span
+class="math inline">\(l_i\)</span> 成一次函数关系，并且随 <span
+class="math inline">\(j\)</span>
+的增加，这些直线的斜率单调递减。在同一直角坐标系中作出它们的图线，大概是这样的：</p>
+<p><img
+src="https://cdn.luogu.com.cn/upload/image_hosting/thkg6lr8.png" /></p>
+<p>而我们最后会对所有 <span class="math inline">\(j\)</span>
+的答案进行一个 <span class="math inline">\(\min\)</span>
+的取，所以真正有用的是上图中的红色部分。</p>
+<p>众所周知，斜率优化会用到单调队列，所以对出队和入队进行分析。</p>
+<p><strong>出队：</strong></p>
+<p><img
+src="https://cdn.luogu.com.cn/upload/image_hosting/t274t3qd.png" /></p>
+<p>现在假设我们队列里有如图三条斜着的直线，而绿色的那条直线是当前的
+<span class="math inline">\(l_i\)</span> 。</p>
+<p>对于队首的第一条直线，它和第二条直线的交点小于当前的 <span
+class="math inline">\(l_i\)</span>
+，第二条直线斜率又比它大，于是它成为了时代的眼泪，于是我们把它 pop
+掉。</p>
+<p><strong>入队：</strong></p>
+<p><img
+src="https://cdn.luogu.com.cn/upload/image_hosting/467bu4pf.png" /></p>
+<p>假设现在往队尾插入橙色直线。</p>
+<p>我们发现橙色直线和队尾直线的交点比队尾直线和倒数第二条直线的交点要靠前，于是橙色直线就覆盖掉了队尾直线的所有优势区间，于是我们把队尾
+pop 掉，把橙色直线塞进去。</p>
+<p>于是可以用队首转移。</p>
+<hr />
+<p>搬运自 Luogu Blog</p>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/blog/tags/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B/">算法竞赛</a></div><div class="post_share"></div></div></div></main><footer id="footer" style="background: #555555"><div id="footer-wrap"><div class="copyright">&copy;2024 By Shyanko</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Email: SShyanko@Gmail.com</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"></div><div id="rightside-config-show"><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/blog/js/utils.js?v=4.13.0"></script><script src="/blog/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script></div></div></body></html>
