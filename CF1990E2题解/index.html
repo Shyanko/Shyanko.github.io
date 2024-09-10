@@ -1,17 +1,17 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>ARC137C | Not A Blog</title><meta name="author" content="Shyanko"><meta name="copyright" content="Shyanko"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="题目链接 给你一个排好序的长度为 \(n\) 的自然数数组 \(A\)，保证 \(A_i\) 互不相同，Alice 和 Bob 轮流操作，每次把 \(A_{max}\) 变成一个更小的自然数，需要保证 \(A\) 中仍然没有相同的数，不能操作则输，问谁赢。 \(2 \leq n \leq 3 \times 10^5,\ 0\leq A_i \leq 10^9\) 考虑第一步每个状态">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>CF1990E2题解 | Not A Blog</title><meta name="author" content="Shyanko"><meta name="copyright" content="Shyanko"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="一个诡异的完全不知道询问次数的做法。 考虑一条链，我们显然二分。 然后考虑一棵树，显然树深度越小越好做，发现和深度有关，我们长剖！ 二分加上长剖，我们每次询问最长链中点，然后根据结果暴力维护就好了。 （维护方法：成功了就只留下询问节点的子树，失败了删掉所有叶子和询问节点子树，加入当前根的父亲。） （注意：成功的时候如果询问节点父亲只剩一个子树，需要删掉父亲） 虽然诡异但是还是有些道理的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ARC137C">
-<meta property="og:url" content="http://shyanko.github.io/ARC137C/">
+<meta property="og:title" content="CF1990E2题解">
+<meta property="og:url" content="http://shyanko.github.io/CF1990E2%E9%A2%98%E8%A7%A3/">
 <meta property="og:site_name" content="Not A Blog">
-<meta property="og:description" content="题目链接 给你一个排好序的长度为 \(n\) 的自然数数组 \(A\)，保证 \(A_i\) 互不相同，Alice 和 Bob 轮流操作，每次把 \(A_{max}\) 变成一个更小的自然数，需要保证 \(A\) 中仍然没有相同的数，不能操作则输，问谁赢。 \(2 \leq n \leq 3 \times 10^5,\ 0\leq A_i \leq 10^9\) 考虑第一步每个状态">
+<meta property="og:description" content="一个诡异的完全不知道询问次数的做法。 考虑一条链，我们显然二分。 然后考虑一棵树，显然树深度越小越好做，发现和深度有关，我们长剖！ 二分加上长剖，我们每次询问最长链中点，然后根据结果暴力维护就好了。 （维护方法：成功了就只留下询问节点的子树，失败了删掉所有叶子和询问节点子树，加入当前根的父亲。） （注意：成功的时候如果询问节点父亲只剩一个子树，需要删掉父亲） 虽然诡异但是还是有些道理的">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
-<meta property="article:published_time" content="2022-03-19T14:32:00.000Z">
-<meta property="article:modified_time" content="2024-07-11T09:30:32.103Z">
+<meta property="article:published_time" content="2024-09-10T13:41:16.000Z">
+<meta property="article:modified_time" content="2024-09-10T13:42:55.020Z">
 <meta property="article:author" content="Shyanko">
 <meta property="article:tag" content="算法竞赛">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://shyanko.github.io/ARC137C/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://shyanko.github.io/CF1990E2%E9%A2%98%E8%A7%A3/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
   root: '/',
   algolia: undefined,
   localSearch: undefined,
@@ -51,12 +51,12 @@
   },
   autoDarkmode: false
 }</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
-  title: 'ARC137C',
+  title: 'CF1990E2题解',
   isPost: true,
   isHome: false,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2024-07-11 17:30:32'
+  postUpdate: '2024-09-10 21:42:55'
 }</script><script>(win=>{
       win.saveToLocal = {
         set: (key, value, ttl) => {
@@ -127,34 +127,16 @@
         }
       }
       detectApple()
-    })(window)</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">9</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Not A Blog"><span class="site-name">Not A Blog</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout hide-aside" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">ARC137C</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-03-19T14:32:00.000Z" title="发表于 2022-03-19 22:32:00">2022-03-19</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-07-11T09:30:32.103Z" title="更新于 2024-07-11 17:30:32">2024-07-11</time></span></div><div class="meta-secondline"></div></div></div><article class="post-content" id="article-container"><p><a
-target="_blank" rel="noopener" href="https://atcoder.jp/contests/arc137/tasks/arc137_c">题目链接</a></p>
-<p>给你一个排好序的长度为 <span class="math inline">\(n\)</span>
-的自然数数组 <span class="math inline">\(A\)</span>，保证 <span
-class="math inline">\(A_i\)</span> 互不相同，Alice 和 Bob
-轮流操作，每次把 <span class="math inline">\(A_{max}\)</span>
-变成一个更小的自然数，需要保证 <span class="math inline">\(A\)</span>
-中仍然没有相同的数，不能操作则输，问谁赢。</p>
-<p><span class="math inline">\(2 \leq n \leq 3 \times 10^5,\ 0\leq A_i
-\leq 10^9\)</span></p>
-<p>考虑第一步每个状态之间的转移关系：</p>
-<p><img
-src="https://cdn.luogu.com.cn/upload/image_hosting/f23ufe3y.png" /></p>
-<p>如果左边那一大坨有必败状态的话，我们显然可以直接转移过去。</p>
-<p>否则由于 <span class="math inline">\(A_n=A_{n-1}+1\)</span>
-这个状态能转移到的全都是必胜状态，所以它自己就是必败状态。</p>
-<p>于是我们发现先手必胜，但是要求 <span class="math inline">\(A_n &gt;
-A_{n-1} + 1\)</span>。</p>
-<p>假如 <span
-class="math inline">\(A_n=A_{n-1}+1\)</span>，那两个人永远都不会让 <span
-class="math inline">\(A\)</span>
-中最大的两个值相差大于等于二，进一步地，我们发现 <span
-class="math inline">\(A_{max}\)</span> 每次操作之后都会且仅会减少 <span
-class="math inline">\(1\)</span> ，于是我们判断一下 <span
-class="math inline">\(A_n-(n-1)\)</span> 的奇偶性即可。</p>
-<p>属于是一道加深对 SG 理解的好题。</p>
-<hr />
-<p>搬运自 Luogu Blog</p>
+    })(window)</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">9</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Not A Blog"><span class="site-name">Not A Blog</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout hide-aside" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">CF1990E2题解</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-09-10T13:41:16.000Z" title="发表于 2024-09-10 21:41:16">2024-09-10</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-09-10T13:42:55.020Z" title="更新于 2024-09-10 21:42:55">2024-09-10</time></span></div><div class="meta-secondline"></div></div></div><article class="post-content" id="article-container"><p>一个诡异的完全不知道询问次数的做法。</p>
+<p>考虑一条链，我们显然二分。</p>
+<p>然后考虑一棵树，显然树深度越小越好做，发现和深度有关，我们长剖！</p>
+<p>二分加上长剖，我们每次询问最长链中点，然后根据结果暴力维护就好了。</p>
+<p>（维护方法：成功了就只留下询问节点的子树，失败了删掉所有叶子和询问节点子树，加入当前根的父亲。）</p>
+<p>（注意：成功的时候如果询问节点父亲只剩一个子树，需要删掉父亲）</p>
+<p>虽然诡异但是还是有些道理的，这种做法可以在深度很大的时候一次保证删掉大量节点，在深度很小的时候随便找个地方问也比在叶子上浪费次数强。</p>
+<p>实测能 <span class="math inline">\(80\)</span> 次以内出解。</p>
+<p><a
+target="_blank" rel="noopener" href="https://codeforces.com/contest/1990/submission/280439840">代码</a></p>
 </article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B/">算法竞赛</a></div><div class="post_share"></div></div></div></main><footer id="footer" style="background: #555555"><div id="footer-wrap"><div class="copyright">&copy;2024 By Shyanko</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Email: SShyanko@Gmail.com</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"></div><div id="rightside-config-show"><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
   window.MathJax = {
     tex: {
