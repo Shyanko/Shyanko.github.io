@@ -1,0 +1,309 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>WHUCSAPPDataLab实验报告 | Not A Blog</title><meta name="author" content="Shyanko"><meta name="copyright" content="Shyanko"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="int 模块规则：  类型只能用 int ； 出现的常数 \(C\in [0,255]\) ； 运算符只能出现 ! | &amp; ~ ^ + &lt;&lt; &gt;&gt; &#x3D;，除了 &#x3D; 以外都算一步。  1. bitOr 只能用 ~ &amp; 实现 Or 典中典。 123456int bitOr(int x, int y) &#123;  int notX &#x3D; ~x">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WHUCSAPPDataLab实验报告">
+<meta property="og:url" content="http://shyanko.github.io/WHUCSAPPDataLab%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/">
+<meta property="og:site_name" content="Not A Blog">
+<meta property="og:description" content="int 模块规则：  类型只能用 int ； 出现的常数 \(C\in [0,255]\) ； 运算符只能出现 ! | &amp; ~ ^ + &lt;&lt; &gt;&gt; &#x3D;，除了 &#x3D; 以外都算一步。  1. bitOr 只能用 ~ &amp; 实现 Or 典中典。 123456int bitOr(int x, int y) &#123;  int notX &#x3D; ~x">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
+<meta property="article:published_time" content="2025-03-06T13:22:29.000Z">
+<meta property="article:modified_time" content="2025-03-06T13:24:39.985Z">
+<meta property="article:author" content="Shyanko">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://shyanko.github.io/WHUCSAPPDataLab%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'WHUCSAPPDataLab实验报告',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2025-03-06 21:24:39'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">10</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Not A Blog"><span class="site-name">Not A Blog</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout hide-aside" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">WHUCSAPPDataLab实验报告</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-03-06T13:22:29.000Z" title="发表于 2025-03-06 21:22:29">2025-03-06</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-03-06T13:24:39.985Z" title="更新于 2025-03-06 21:24:39">2025-03-06</time></span></div><div class="meta-secondline"></div></div></div><article class="post-content" id="article-container"><p><strong><code>int</code> 模块规则：</strong></p>
+<ol type="1">
+<li>类型只能用 <code>int</code> ；</li>
+<li>出现的常数 <span class="math inline">\(C\in [0,255]\)</span> ；</li>
+<li>运算符只能出现
+<code>! | &amp; ~ ^ + &lt;&lt; &gt;&gt; =</code>，除了 <code>=</code>
+以外都算一步。</li>
+</ol>
+<h4 id="bitor">1. bitOr</h4>
+<p><strong>只能用 <code>~ &amp;</code> 实现 Or</strong></p>
+<p>典中典。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">bitOr</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span> &#123;</span><br><span class="line">  <span class="type">int</span> notX = ~x;</span><br><span class="line">  <span class="type">int</span> notY = ~y;</span><br><span class="line">  <span class="type">int</span> nandn = notX &amp; notY;</span><br><span class="line">  <span class="keyword">return</span> ~nandn;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="anyevenbit">2. anyEvenBit</h4>
+<p><strong>判断是否有任意一个偶数位是 <code>1</code></strong></p>
+<p>由于只能用 <span class="math inline">\(8\)</span>
+位的常数，我们考虑把所有位缩到后面八位上，再 <code>and</code> 一个
+<code>0x55</code> ，然后用两次 <code>!</code> 转 <code>bool</code>
+即可。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">anyEvenBit</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">  <span class="type">int</span> hb = (x &gt;&gt; <span class="number">16</span>) | x;</span><br><span class="line">  <span class="type">int</span> ans = ((hb &gt;&gt; <span class="number">8</span>) | hb) &amp; <span class="number">0x55</span>;</span><br><span class="line">  <span class="keyword">return</span> !(!ans);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="rotateleft">3. rotateLeft</h4>
+<p><strong>实现循环左移，左移位数 <span class="math inline">\(n\in
+[0,31]\)</span></strong></p>
+<p>朴素思路是 <code>(x &lt;&lt; n) | (x &gt;&gt; (32 - n))</code></p>
+<p>然而有两个锅，第一个锅是右移 <span class="math inline">\(32\)</span>
+是 UB ，第二个锅是由于 <code>int</code> 算数右移，如果 <span
+class="math inline">\(x\)</span> 是负数的话就会左边全部是 <span
+class="math inline">\(1\)</span> 。</p>
+<p>笔者做法是先右移一位，然后 <code>and</code> 一个
+<code>~(1 &lt;&lt; 31)</code> 去掉多余符号位，然后再右移 <span
+class="math inline">\(31-n\)</span> ，减法用补码实现。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">rotateLeft</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> n)</span> &#123;</span><br><span class="line">  <span class="type">int</span> r = x &lt;&lt; n;</span><br><span class="line">  <span class="type">int</span> lx = (x &gt;&gt; <span class="number">1</span>) &amp; ~(<span class="number">1</span> &lt;&lt; <span class="number">31</span>);</span><br><span class="line">  <span class="type">int</span> l = lx &gt;&gt; (<span class="number">32</span> + ~n);</span><br><span class="line">  <span class="keyword">return</span> l + r</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>但是这样是 <span class="math inline">\(9\)</span>
+步，比榜一多一步，然而我拼尽全力无法战胜，把问题扔给了某和 WHU
+很像的学校的某同学，他给出了下面的做法：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">rotateLeft</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> n)</span> &#123;</span><br><span class="line">  <span class="type">int</span> t = (<span class="number">32</span> + ~n);</span><br><span class="line">  <span class="type">int</span> y = x &gt;&gt; <span class="number">31</span>;</span><br><span class="line">  <span class="type">int</span> r = (x ^ y) &lt;&lt; n;</span><br><span class="line">  <span class="type">int</span> l = x &gt;&gt; <span class="number">1</span> &gt;&gt; t; </span><br><span class="line">  <span class="keyword">return</span> l ^ r;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><del>异或拿了MVP！</del></p>
+<p>其实仔细研究一下还是能想出来的，但是我不知道为什么没想出来。</p>
+<p>我们考虑最后把 <code>l, r</code>
+合并时能用的操作，这样强力的操作一共有三种：<code>| ^ +</code>
+。虽然看上去是一样的，但是我们知道异或感性地讲能够在操作前后保存更多的信息。</p>
+<p>基于此，我们能够注意到如果 <code>l</code> 不对符号位进行处理，异或
+<code>r</code> 的时候就会让 <code>r</code> 取反。所以只需要在求
+<code>r</code> 的时候先用 <code>x</code>
+的符号位控制它取一遍反，这样后面就能抵消了。</p>
+<h4 id="greatestbitpos">4. greatestBitPos</h4>
+<p><strong>求 <code>HighBit</code> 对应的那个 <span
+class="math inline">\(2\)</span> 的某个次幂</strong></p>
+<p>我们考虑构造一个把没用的信息都丢掉的中间体，自然地想到这个中间体是
+<code>HighBit</code> 后面全是 <code>1</code>
+。然后考虑怎么搞出来，相当于用最高位把后面全部覆盖，容易想到用倍增法。</p>
+<p>得到这个之后只需要异或“自己右移一位”就行了。</p>
+<p>然后还有个坑，就是 <code>-1</code> 右移的问题，解决方案是
+<code>and</code> 一个 <code>~(1 &lt;&lt; 31)</code> 。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">greatestBitPos</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">  x |= (x &gt;&gt; <span class="number">1</span>);</span><br><span class="line">  x |= (x &gt;&gt; <span class="number">2</span>);</span><br><span class="line">  x |= (x &gt;&gt; <span class="number">4</span>);</span><br><span class="line">  x |= (x &gt;&gt; <span class="number">8</span>);</span><br><span class="line">  x |= (x &gt;&gt; <span class="number">16</span>);</span><br><span class="line">  x ^= ((x &gt;&gt; <span class="number">1</span>) &amp; ~(<span class="number">1</span> &lt;&lt; <span class="number">31</span>));</span><br><span class="line">  <span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="leastbitpos">5. leastBitPos</h4>
+<p><strong>求 <code>LowBit</code> 对应的那个 <span
+class="math inline">\(2\)</span> 的某个次幂</strong></p>
+<p>典中典中典中典，刻进 oier's DNA 里边的 <code>x &amp; -x</code> 。</p>
+<p>道理就是取反之后低位的 <span class="math inline">\(0\)</span>
+全部变成 <span class="math inline">\(1\)</span> ，然后补码给它加个 <span
+class="math inline">\(1\)</span> ，然后进位，使得反码第一个 <span
+class="math inline">\(0\)</span> 变成 <span
+class="math inline">\(1\)</span> 。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">leastBitPos</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> x &amp; (~x + <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="subok">6. subOK</h4>
+<p><strong>判断 <code>x-y</code> 的计算是否会出现溢出</strong></p>
+<p><code>x-y</code> 当然使用补码实现，即 <code>x + (~y + 1)</code>
+。</p>
+<p>自然的想法是判断上面那个加法是否溢出，即结果的符号位和
+<code>x,y</code> 都不一样。但是这里有个坑，<code>INT_MIN</code>
+的补码是它自己，于是当 <code>y=INT_MIN</code> 的时候就会挂掉。</p>
+<p>修正方法就是用原来的符号位判断。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">subOK</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span> &#123;</span><br><span class="line">  <span class="type">int</span> ans = x + <span class="number">1</span> + ~y;</span><br><span class="line">  <span class="keyword">return</span> !(((ans ^ x) &amp; (x ^ y)) &gt;&gt; <span class="number">31</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="satmul3">7. satMul3</h4>
+<p><strong>计算 <code>3*x</code> ，溢出需要返回 <code>int</code>
+的极值</strong></p>
+<p>显然需要这样计算 <code>3*x</code> ：<code>x + (x &lt;&lt; 1)</code>
+。</p>
+<p>然后考虑溢出问题。只判断最后一步溢出显然是不行的，乘二的时候可能已经溢出了，然后导致最后一步看上去没溢出。所以需要判断两步的溢出。</p>
+<p>两次都不溢出可以推出：结果、<code>x</code> 乘二和 <code>x</code>
+的符号位全部一样。尝试证明充分性，发现溢出的结果的符号位一定和某个操作数不一样，并且如果其他步不溢出，两个操作数的符号一定是一样的，因此存在溢出可以推出某次的结果和某个操作数符号不一样。因此可以直接使用
+<code>ovf3 = (x3 ^ x2) | (x2 ^ x)</code> 的符号位判断溢出。</p>
+<p>然后观察两个极值，发现 <code>INT_MAX == ~INT_MIN</code>
+。用哪个可以通过异或 <code>x</code>
+的符号位来控制一次取反。然后还需要设计一个控制方式来适时放出实际答案。</p>
+<p>这个时候会发现让 <code>ovf3 &gt;&gt;= 31</code> 会更好用。全
+<code>1</code> 不仅能用 <code>|</code> 抹掉答案，由于
+<code>INT_MIN</code> 是好表示的，此时 <code>x</code> 符号位是
+<code>1</code>
+，状态反了，还能补一次异或。然后还需要让答案能出来，只需要让两个极值
+<code>&amp;~ovf3</code> 即可。</p>
+<p>感觉是最优雅的一个题。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">satMul3</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">    <span class="type">int</span> x2 = x &lt;&lt; <span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span> ans = x2 + x;</span><br><span class="line">    <span class="type">int</span> ovf3 = ((ans ^ x2) | (x2 ^ x)) &gt;&gt; <span class="number">31</span>;</span><br><span class="line">    <span class="keyword">return</span> (ovf3 | ans) ^ (((<span class="number">1</span> &lt;&lt; <span class="number">31</span>) ^ (x &gt;&gt; <span class="number">31</span>)) &amp; ovf3);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="divpwr2">8. divpwr2</h4>
+<p><strong>除 <span class="math inline">\(2^n\)</span> 向 <span
+class="math inline">\(0\)</span> 取整</strong></p>
+<p>这个就很简单了，用符号位去构造一个 <span
+class="math inline">\(2^n-1\)</span> （也就是最低 <code>n</code> 位全是
+<span class="math inline">\(1\)</span> ）加上就行了。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">divpwr2</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> n)</span> &#123;</span><br><span class="line">    <span class="type">int</span> sgn = (x &gt;&gt; <span class="number">31</span>);</span><br><span class="line">    <span class="type">int</span> dlt = (sgn &lt;&lt; n) ^ sgn;</span><br><span class="line">    <span class="keyword">return</span> (x + dlt) &gt;&gt; n;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong><code>float</code> 模块规则：</strong></p>
+<ol type="1">
+<li>数据类型只能用 <code>int, uint</code> ，<code>float</code>
+的传入传出使用一个和它位表示相同的 <code>uint</code> 实现。</li>
+<li>禁掉函数、宏定义、数组、强制类型转换，其它没有限制。</li>
+</ol>
+<h4 id="float_abs">9. float_abs</h4>
+<p><strong>浮点数取绝对值，<code>NAN</code> 的绝对值是自己</strong></p>
+<p>简单。发现负的 <code>NAN</code>
+一定大于（？）<code>0xff800000</code>，判掉就行了。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="type">unsigned</span> <span class="title function_">float_abs</span><span class="params">(<span class="type">unsigned</span> uf)</span> &#123;</span><br><span class="line">  <span class="keyword">if</span>(uf &gt; <span class="number">0xff800000</span>) <span class="keyword">return</span> uf;</span><br><span class="line">  <span class="keyword">return</span> uf &amp; <span class="number">0x7fffffff</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="float_i2f">10. float_i2f</h4>
+<p><strong>实现 <code>int</code> 强转 <code>float</code></strong></p>
+<p>重头戏，刷榜主战场，目前主播暂时 <span
+class="math inline">\(8\)</span> 步榜一 （虽然是邪道方法）</p>
+<p>首先搞一个框架：</p>
+<ol type="1">
+<li>判掉 <code>INT_MIN</code> （因为没法取绝对值）和 <code>0</code>
+；</li>
+<li>判掉正负；</li>
+<li>一直右移求位数；</li>
+<li>左右移动调到尾数的位置；</li>
+<li>计算舍入；</li>
+<li>计算阶码；</li>
+<li>加起来求答案；</li>
+</ol>
+<p>注意到计算阶码可以在前面的步骤里面省掉，具体方法是设初值、算位数和算正负的时候直接用阶码的对应的运算方法加上去（比如位数每多一位加上
+<code>1 &lt;&lt; 24</code> ）。</p>
+<p>但是这样子算左右移动位数就要解方程，十分浪费。于是我们想到
+<code>switch</code> ！直接利用 <code>switch</code>
+枚举阶码的值，然后把左右移动的值赋给变量，这样子就能 <span
+class="math inline">\(0\)</span>
+步解方程了。当然这不是人干的活，我们写个程序丢给电脑干就行了。</p>
+<p>然后我们又想到计算舍入也很麻烦，也打个表，发现舍入只需要关心后 <span
+class="math inline">\(8\)</span> 位和阶码即可，我们枚举它，每个后 <span
+class="math inline">\(8\)</span>
+位只有两个阶码可能产生进一，我们也枚举它，枚举量大概是 <span
+class="math inline">\(500\)</span>
+，可以接受。因为枚举了阶码，所以直接把阶码赋值成它自己加一就行了，于是实现了
+<span class="math inline">\(0\)</span> 步计算舍入。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> <span class="title function_">float_i2f</span><span class="params">(<span class="type">int</span> x)</span> </span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">unsigned</span> cnt = <span class="number">1056964608</span>;</span><br><span class="line">    <span class="type">int</span> lmov = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> rmov = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> uand = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> lst = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> lx = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">switch</span> (x)</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">0x80000000</span>: </span><br><span class="line">        <span class="keyword">return</span> <span class="number">0xcf000000</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(x &lt; <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">      x = -x;</span><br><span class="line">      cnt = <span class="number">3204448256</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    lx = x;</span><br><span class="line">    <span class="keyword">while</span>(lx &gt;&gt;= <span class="number">1</span>)</span><br><span class="line">      cnt += <span class="number">8388608</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//枚举cnt，求lmov rmov uand</span></span><br><span class="line">    <span class="keyword">switch</span>(cnt)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//打表1，太长省略</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    lst = x &amp; uand;</span><br><span class="line">    x &gt;&gt;= rmov;</span><br><span class="line">    x &lt;&lt;= lmov;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//枚举 lst 和 cnt，给 cnt 赋值为加上偏移量之后的值；</span></span><br><span class="line">    <span class="keyword">switch</span> (lst)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//打表2，太长省略</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> x + cnt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>打表程序一：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">31</span>; i ++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> nu = (<span class="number">125</span> + i) &lt;&lt; <span class="number">23</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;case %u :\n&quot;</span>, nu);</span><br><span class="line">    <span class="keyword">if</span>(i &gt; <span class="number">24</span>)</span><br><span class="line">    &#123;</span><br><span class="line">       <span class="built_in">printf</span>(<span class="string">&quot;  rmov = %d;\n&quot;</span>, i - <span class="number">24</span>);</span><br><span class="line">       <span class="built_in">printf</span>(<span class="string">&quot;  uand = %d;\n&quot;</span>, (<span class="number">1</span> &lt;&lt; (i - <span class="number">23</span>)) - <span class="number">1</span>);</span><br><span class="line">    &#125; </span><br><span class="line">    <span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">&quot;  lmov = %d;\n&quot;</span>, <span class="number">24</span> - i);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;break;\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    nu = ((<span class="number">125</span> + i) &lt;&lt; <span class="number">23</span>) + (<span class="number">1</span> &lt;&lt; <span class="number">31</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;case %u :\n&quot;</span>, nu);</span><br><span class="line">    <span class="keyword">if</span>(i &gt; <span class="number">24</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;  rmov = %d;\n&quot;</span>, i - <span class="number">24</span>);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;  uand = %d;\n&quot;</span>, (<span class="number">1</span> &lt;&lt; (i - <span class="number">23</span>)) - <span class="number">1</span>);</span><br><span class="line">    &#125; </span><br><span class="line">    <span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">&quot;  lmov = %d;\n&quot;</span>, <span class="number">24</span> - i);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;break;\n&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>打表程序二：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt; (<span class="number">1</span> &lt;&lt; <span class="number">8</span>); i ++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> lst = i;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;case %d :\n&quot;</span>, lst);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;  switch(cnt)&#123;\n&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">25</span>; j &lt;= <span class="number">31</span>; j ++)</span><br><span class="line">    &#123;</span><br><span class="line">       <span class="type">int</span> rmov = j - <span class="number">24</span>;</span><br><span class="line">       <span class="keyword">if</span>((i &gt;&gt; rmov) &gt; <span class="number">1</span>) <span class="keyword">continue</span>;</span><br><span class="line">       <span class="keyword">if</span>((i &gt;&gt; (rmov - <span class="number">1</span>)) &amp; <span class="number">1</span>)</span><br><span class="line">       &#123;</span><br><span class="line">          <span class="keyword">if</span>((i &amp; ((<span class="number">1</span> &lt;&lt; (rmov - <span class="number">1</span>)) - <span class="number">1</span>)) || (i &gt;&gt; rmov))</span><br><span class="line">          &#123;</span><br><span class="line">             <span class="type">unsigned</span> nu = (<span class="number">125</span> + j) &lt;&lt; <span class="number">23</span>;</span><br><span class="line">             <span class="built_in">printf</span>(<span class="string">&quot;  case %u :&quot;</span>, nu);</span><br><span class="line">             <span class="built_in">printf</span>(<span class="string">&quot;    cnt = %u;\n&quot;</span>, nu + <span class="number">1</span>);</span><br><span class="line">             <span class="built_in">printf</span>(<span class="string">&quot;  break;\n&quot;</span>);</span><br><span class="line">             nu += (<span class="number">1</span> &lt;&lt; <span class="number">31</span>);</span><br><span class="line">             <span class="built_in">printf</span>(<span class="string">&quot;  case %u :&quot;</span>, nu);</span><br><span class="line">             <span class="built_in">printf</span>(<span class="string">&quot;    cnt = %u;\n&quot;</span>, nu + <span class="number">1</span>);</span><br><span class="line">             <span class="built_in">printf</span>(<span class="string">&quot;  break;\n&quot;</span>);</span><br><span class="line">          &#125;</span><br><span class="line">       &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;  &#125;\n&quot;</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;break;\n&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</article><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"></div></div></div></main><footer id="footer" style="background: #555555"><div id="footer-wrap"><div class="copyright">&copy;2024 - 2025 By Shyanko</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Email: SShyanko@Gmail.com</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"></div><div id="rightside-config-show"><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script></div></div></body></html>
